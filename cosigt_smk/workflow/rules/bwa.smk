@@ -72,7 +72,7 @@ rule bwa_aln_old:
 		bwa aln -0 -t {threads} -l 1024 -n 0.01 -o 2 {input.ref} {input.sample} > {output}
 		'''
 
-rule bwa_samse_old:
+rule bwa_samse_old_samtools_sort:
 	'''
 	Bwa samse and samtools sort
 	'''
