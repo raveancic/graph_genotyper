@@ -3,7 +3,10 @@ set -x
 
 #conda environemnt - load
 eval "$(conda shell.bash hook)"
-conda activate /global/home/users/davidebolognini/micromamba/envs/snakemake_latest
+conda activate /ssu/gassu/conda_envs/snakemakeenv_latest
+
+module load singularity
+
 #run
 bindings=$(cat singularity_bind_paths.csv)
 stringb=$(echo "-B $bindings")

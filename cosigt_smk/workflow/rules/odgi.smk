@@ -9,7 +9,7 @@ rule odgi_chop:
 	threads:
 		1
 	container:
-		'docker://davidebolo1993/graph_genotyper:latest'
+		'docker://pangenome/odgi:1698280193'
 	shell:
 		'''
 		odgi chop  \
@@ -31,14 +31,14 @@ rule odgi_build:
 	threads:
 		1
 	container:
-		'docker://davidebolo1993/graph_genotyper:latest'
+		'docker://pangenome/odgi:1698280193'
 	shell:
 		'''
 		odgi build \
 		-g {input} \
 		-o - | odgi paths \
 		-i - \
-		-H | cut -f 1,4- | pigz > {output}
+		-H | cut -f 1,4- | gzip > {output}
 		'''
 
 rule odgi_paths:
@@ -52,7 +52,7 @@ rule odgi_paths:
 	threads:
 		1
 	container:
-		'docker://davidebolo1993/graph_genotyper:latest'
+		'docker://pangenome/odgi:1698280193'
 	shell:
 		'''
 		odgi paths \
