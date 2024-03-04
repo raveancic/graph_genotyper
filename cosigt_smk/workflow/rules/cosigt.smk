@@ -23,7 +23,7 @@ rule cosigt_genotype:
 		prefix="results/cosigt_results/{sample}"
 	shell:
 		'''
-		cosigt {input.zpath} {input.xpack} resources/extra/bad_samples.txt {params.prefix}
+		cosigt -p {input.zpath} -g {input.xpack} -b resources/extra/bad_samples.txt -o {params.prefix}
 		'''
 
 rule evaluate_cosigt:
@@ -40,7 +40,8 @@ rule evaluate_cosigt:
 		samplename="{sample}"
 	shell:
 		'''
-		sort -k 2 -n -r {input} | awk -v var="{params.samplename}" -F '{params.samplename}' '{{print NR "\t" NF-1 "\t" var "\t" $0}}' | sed "s/haplotype1-/haplotype1_/g" | sed "s/haplotype2-/haplotype2_/g" | tr '-' '\t' | sed "s/haplotype1_/haplotype1-/g" | sed "s/haplotype2_/haplotype2-/g"  > {output}
+		sort -k 2 -n -r {input} | awk -v var="{params.samplename}" -F '{params.samplename}' '{{print NR "\t" NF-1 "\t" var "\t" $0}}' | sed 's/haplotype1-/haplotype1_/g' | sed 's/haplotype2-/haplotype2_/g' | sed -E 's/([0-9])\-([0-9])/\\1_\\2/g' |tr '-' '\t' | sed 's/haplotype1_/haplotype1-/g' | sed 's/haplotype2_/haplotype2-/g'  > {output}
+
 		'''
 
 rule plot_evaluation:

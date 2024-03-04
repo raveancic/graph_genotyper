@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 
+=======
+badsample1
+badsample2
+>>>>>>> master

@@ -63,7 +63,7 @@ def eval_sample(infile,json):
 	'''
 
 	df=pd.read_table(infile, sep="\t", header=None)
-	sample=list(df.head(1)[2])[0]
+	sample=list(df.head(1)[2])[0].split(".")[0]
 	haplos=GetHaplotypes(sample,df)
 	vec=np.zeros(df.shape[0])
 
