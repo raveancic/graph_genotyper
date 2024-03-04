@@ -26,7 +26,7 @@ for c in $cram; do
 	idx=$(ls $c"."*i)
 	ext="${idx##*.}"
 	ln -sf $c"."$ext resources/cram/$filename"."$ext
-	filename=$(echo $filename | cut -d "." -f 1)
+ 	filename=$(echo ${filename%.*am})
 	echo -e "$filename\t$c" >> config/samples.tsv
 
 done
